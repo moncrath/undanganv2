@@ -129,21 +129,27 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // Update Progress Bar
+    // Update Progress Bar (Protected with safe checks in case elements are removed)
     function updateProgress() {
         const total = Object.keys(state.foundItems).length;
         const found = Object.values(state.foundItems).filter(val => val === true).length;
         
-        foundCountLabel.textContent = found;
+        if (foundCountLabel) {
+            foundCountLabel.textContent = found;
+        }
         const percentage = (found / total) * 100;
-        progressFill.style.width = `${percentage}%`;
+        if (progressFill) {
+            progressFill.style.width = `${percentage}%`;
+        }
 
         // Delight Easter Egg Spell: Special celebration when all objects found
         if (found === total) {
             setTimeout(() => {
                 showToast("Selamat! Kamu sudah menemukan semua detail undangan kami! ❤️✨");
                 // Gentle pulse animation to progress fill
-                progressFill.style.animation = "heartbeat 2s infinite";
+                if (progressFill) {
+                    progressFill.style.animation = "heartbeat 2s infinite";
+                }
             }, 800);
         }
     }

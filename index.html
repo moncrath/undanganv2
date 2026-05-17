@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=2">
 </head>
 <body>
 
@@ -60,71 +60,47 @@
 
         <!-- THE MEMORY ROOM (The central interactive game scene) -->
         <div class="memory-room" id="memory-room">
-            <!-- The Room Background Grid/Elements -->
-            <div class="room-wall">
-                <div class="window">
-                    <div class="starry-sky"></div>
-                    <div class="moon"></div>
-                </div>
-            </div>
+            <!-- Background Wall Placeholder (will contain user's custom room background) -->
+            <div class="room-wall"></div>
             
             <div class="room-desk">
                 <!-- 1. FIGURE MEMPELAI (Interactive Object) -->
                 <div class="interactive-object obj-figures" id="obj-figures" data-target="modal-figures">
                     <div class="object-glow"></div>
-                    <div class="figurine-wrapper">
-                        <!-- Custom CSS SVG Groom and Bride Dolls -->
-                        <div class="mini-couple">
-                            <span class="couple-avatar groom"><i class="fa-solid fa-user-tie"></i></span>
-                            <span class="couple-avatar bride"><i class="fa-solid fa-person-dress"></i></span>
-                        </div>
-                    </div>
+                    <img src="assets/object/Mempelai.png" alt="Mempelai" class="object-image-placeholder">
                     <span class="object-label">Mempelai</span>
                 </div>
 
                 <!-- 2. PETA (Interactive Object) -->
                 <div class="interactive-object obj-map" id="obj-map" data-target="modal-map">
                     <div class="object-glow"></div>
-                    <i class="fa-solid fa-map-location-dot map-icon"></i>
+                    <img src="assets/object/Peta.png" alt="Lokasi" class="object-image-placeholder">
                     <span class="object-label">Lokasi</span>
                 </div>
 
                 <!-- 3. BUKU TAMU (Interactive Object) -->
                 <div class="interactive-object obj-guestbook" id="obj-guestbook" data-target="modal-guestbook">
                     <div class="object-glow"></div>
-                    <i class="fa-solid fa-book-open guestbook-icon"></i>
+                    <img src="assets/object/Buku-Tamu.png" alt="Buku Tamu" class="object-image-placeholder">
                     <span class="object-label">Buku Tamu</span>
                 </div>
 
                 <!-- 4. KISAH AWAL KETEMU (Interactive Object) -->
                 <div class="interactive-object obj-story" id="obj-story" data-target="modal-story">
                     <div class="object-glow"></div>
-                    <div class="polaroid-wrapper">
-                        <div class="polaroid-photo">
-                            <i class="fa-solid fa-image"></i>
-                        </div>
-                    </div>
+                    <img src="assets/object/Kisah-kita.png" alt="Kisah Kita" class="object-image-placeholder">
                     <span class="object-label">Kisah Kita</span>
                 </div>
 
                 <!-- 5. GIFT (Interactive Object) -->
                 <div class="interactive-object obj-gift" id="obj-gift" data-target="modal-gift">
                     <div class="object-glow"></div>
-                    <i class="fa-solid fa-gift gift-icon"></i>
+                    <img src="assets/object/weddingGift.png" alt="Wedding Gift" class="object-image-placeholder">
                     <span class="object-label">Wedding Gift</span>
                 </div>
             </div>
         </div>
 
-        <!-- FOOTER & PROGRESS TRACKER -->
-        <footer class="game-footer">
-            <div class="progress-bar-container">
-                <span class="progress-title">Benda ditemukan: <span id="found-count">0</span> / 5</span>
-                <div class="progress-track">
-                    <div class="progress-fill" id="progress-fill" style="width: 0%;"></div>
-                </div>
-            </div>
-        </footer>
 
     </div>
 
@@ -313,7 +289,7 @@
 
     <!-- BACKGROUND AUDIO ELEMENT (Royalty-free romantic piano track) -->
     <audio id="bg-music" loop>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+        <source src="assets/music/BGM.mp3" type="audio/mpeg">
     </audio>
 
     <!-- JavaScript Bundle -->
