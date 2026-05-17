@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ruang Kenangan — Undangan Pernikahan Interaktif</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Sebuah undangan pernikahan interaktif berkonsep game misteri. Temukan kisah cinta kami di Ruang Kenangan.">
+    <meta name="author" content="Hitomi & Sayang">
+    <meta property="og:title" content="Ruang Kenangan — Undangan Pernikahan Interaktif">
+    <meta property="og:description" content="Sebuah undangan pernikahan interaktif berkonsep game misteri. Temukan kisah cinta kami di Ruang Kenangan.">
+    <meta property="og:type" content="website">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- PRELOADER -->
+    <div id="preloader" class="preloader">
+        <div class="preloader-content">
+            <div class="heart-loader">
+                <i class="fa-solid fa-heart"></i>
+            </div>
+            <h2>Membuka Ruang Kenangan</h2>
+            <p>Silakan tunggu sebentar, sayang...</p>
+            <button id="start-btn" class="start-btn" style="display: none;">Masuk ke Ruangan ❤️</button>
+        </div>
+    </div>
+
+    <!-- BACKGROUND FLOATING PARTICLES -->
+    <div id="particles-container"></div>
+
+    <!-- MAIN VIEWPORT CONTAINER (Simulating a beautiful mobile frame or desktop center stage) -->
+    <div class="main-container">
+        
+        <!-- HEADER ACARA -->
+        <header class="game-header">
+            <div class="header-badge">Undangan Pernikahan</div>
+            <h1 class="couple-title">Romeo & Juliet</h1>
+            <p class="game-instruction"><i class="fa-solid fa-hand-pointer animate-tap"></i> Ketuk benda-benda di ruangan untuk mencari tahu info detail!</p>
+        </header>
+
+        <!-- FLOATING MUSIC PLAYER -->
+        <div class="music-controller">
+            <div id="music-disc" class="music-disc">
+                <i class="fa-solid fa-compact-disc"></i>
+            </div>
+            <span class="music-tooltip">Putar Musik</span>
+        </div>
+
+        <!-- THE MEMORY ROOM (The central interactive game scene) -->
+        <div class="memory-room" id="memory-room">
+            <!-- The Room Background Grid/Elements -->
+            <div class="room-wall">
+                <div class="window">
+                    <div class="starry-sky"></div>
+                    <div class="moon"></div>
+                </div>
+            </div>
+            
+            <div class="room-desk">
+                <!-- 1. FIGURE MEMPELAI (Interactive Object) -->
+                <div class="interactive-object obj-figures" id="obj-figures" data-target="modal-figures">
+                    <div class="object-glow"></div>
+                    <div class="figurine-wrapper">
+                        <!-- Custom CSS SVG Groom and Bride Dolls -->
+                        <div class="mini-couple">
+                            <span class="couple-avatar groom"><i class="fa-solid fa-user-tie"></i></span>
+                            <span class="couple-avatar bride"><i class="fa-solid fa-person-dress"></i></span>
+                        </div>
+                    </div>
+                    <span class="object-label">Mempelai</span>
+                </div>
+
+                <!-- 2. PETA (Interactive Object) -->
+                <div class="interactive-object obj-map" id="obj-map" data-target="modal-map">
+                    <div class="object-glow"></div>
+                    <i class="fa-solid fa-map-location-dot map-icon"></i>
+                    <span class="object-label">Lokasi</span>
+                </div>
+
+                <!-- 3. BUKU TAMU (Interactive Object) -->
+                <div class="interactive-object obj-guestbook" id="obj-guestbook" data-target="modal-guestbook">
+                    <div class="object-glow"></div>
+                    <i class="fa-solid fa-book-open guestbook-icon"></i>
+                    <span class="object-label">Buku Tamu</span>
+                </div>
+
+                <!-- 4. KISAH AWAL KETEMU (Interactive Object) -->
+                <div class="interactive-object obj-story" id="obj-story" data-target="modal-story">
+                    <div class="object-glow"></div>
+                    <div class="polaroid-wrapper">
+                        <div class="polaroid-photo">
+                            <i class="fa-solid fa-image"></i>
+                        </div>
+                    </div>
+                    <span class="object-label">Kisah Kita</span>
+                </div>
+
+                <!-- 5. GIFT (Interactive Object) -->
+                <div class="interactive-object obj-gift" id="obj-gift" data-target="modal-gift">
+                    <div class="object-glow"></div>
+                    <i class="fa-solid fa-gift gift-icon"></i>
+                    <span class="object-label">Wedding Gift</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- FOOTER & PROGRESS TRACKER -->
+        <footer class="game-footer">
+            <div class="progress-bar-container">
+                <span class="progress-title">Benda ditemukan: <span id="found-count">0</span> / 5</span>
+                <div class="progress-track">
+                    <div class="progress-fill" id="progress-fill" style="width: 0%;"></div>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- ==================== POPUP MODALS ==================== -->
+
+    <!-- MODAL 1: BONEKA FIGURE MEMPELAI (Warm greetings & profile) -->
+    <div class="modal-overlay" id="modal-figures">
+        <div class="modal-card">
+            <button class="modal-close" data-close="modal-figures">&times;</button>
+            <div class="modal-header">
+                <i class="fa-solid fa-heart modal-icon"></i>
+                <h2>Mempelai Pernikahan</h2>
+            </div>
+            <div class="modal-body text-center">
+                <div class="couple-profiles">
+                    <div class="profile-card">
+                        <div class="profile-img"><i class="fa-solid fa-user-tie"></i></div>
+                        <h3>Romeo Montague</h3>
+                        <p class="parent-name">Putra dari Bpk. Montague & Ibu Montague</p>
+                    </div>
+                    <div class="heart-divider"><i class="fa-solid fa-heart-pulse"></i></div>
+                    <div class="profile-card">
+                        <div class="profile-img"><i class="fa-solid fa-person-dress"></i></div>
+                        <h3>Juliet Capulet</h3>
+                        <p class="parent-name">Putri dari Bpk. Capulet & Ibu Capulet</p>
+                    </div>
+                </div>
+                
+                <div class="thank-you-msg">
+                    <p>"Merupakan suatu kebahagiaan yang sangat besar bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir di hari bahagia kami untuk memberikan doa restu. Terima kasih atas segala ucapan dan kasih sayang."</p>
+                    <span class="signature">- Romeo & Juliet -</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 2: PETA (Alamat & Integrasi Google Maps) -->
+    <div class="modal-overlay" id="modal-map">
+        <div class="modal-card">
+            <button class="modal-close" data-close="modal-map">&times;</button>
+            <div class="modal-header">
+                <i class="fa-solid fa-map-location-dot modal-icon"></i>
+                <h2>Waktu & Lokasi Acara</h2>
+            </div>
+            <div class="modal-body">
+                <div class="event-details">
+                    <div class="event-box">
+                        <div class="event-icon"><i class="fa-solid fa-ring"></i></div>
+                        <h3>Akad Nikah</h3>
+                        <p class="event-date"><i class="fa-regular fa-calendar"></i> Minggu, 20 September 2026</p>
+                        <p class="event-time"><i class="fa-regular fa-clock"></i> 09.00 - 10.30 WIB</p>
+                        <p class="event-loc"><i class="fa-solid fa-location-dot"></i> Masjid Agung Kasih Sayang, Jakarta</p>
+                    </div>
+                    <div class="event-box">
+                        <div class="event-icon"><i class="fa-solid fa-champagne-glasses"></i></div>
+                        <h3>Resepsi Pernikahan</h3>
+                        <p class="event-date"><i class="fa-regular fa-calendar"></i> Minggu, 20 September 2026</p>
+                        <p class="event-time"><i class="fa-regular fa-clock"></i> 11.00 - selesai WIB</p>
+                        <p class="event-loc"><i class="fa-solid fa-location-dot"></i> Ballroom Kastil Impian, Jakarta Selatan</p>
+                    </div>
+                </div>
+
+                <!-- Google Maps Link Integration -->
+                <div class="maps-integration">
+                    <p class="address-text"><strong>Ballroom Kastil Impian</strong><br>Jl. Romansa Indah No. 14, Kebayoran Baru, Jakarta Selatan</p>
+                    <a href="https://maps.google.com/?q=Ballroom+Kastil+Impian+Jakarta" target="_blank" class="maps-btn">
+                        <i class="fa-solid fa-route"></i> Petunjuk Arah via Google Maps
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 3: BUKU TAMU (Guest comments, wishes, name, history) -->
+    <div class="modal-overlay" id="modal-guestbook">
+        <div class="modal-card">
+            <button class="modal-close" data-close="modal-guestbook">&times;</button>
+            <div class="modal-header">
+                <i class="fa-solid fa-book-open modal-icon"></i>
+                <h2>Buku Tamu Digital</h2>
+            </div>
+            <div class="modal-body">
+                <form id="guestbook-form" class="guestbook-form">
+                    <div class="form-group">
+                        <label for="guest-name">Nama Tamu</label>
+                        <input type="text" id="guest-name" placeholder="Masukkan nama Anda..." required>
+                    </div>
+                    <div class="form-group">
+                        <label for="guest-wish">Doa & Ucapan</label>
+                        <textarea id="guest-wish" rows="3" placeholder="Tuliskan doa & harapan terbaik Anda..." required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn"><i class="fa-solid fa-paper-plane"></i> Kirim Ucapan</button>
+                </form>
+
+                <div class="wishes-list-container">
+                    <h3>Daftar Ucapan & Doa (<span id="wish-count">0</span>)</h3>
+                    <div class="wishes-list" id="wishes-list">
+                        <!-- Chat history list generated by JS -->
+                        <div class="no-wishes" id="no-wishes">Belum ada ucapan. Jadilah yang pertama memberikan doa restu! ❤️</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 4: KISAH AWAL KETEMU (Milestone slideshow + foto) -->
+    <div class="modal-overlay" id="modal-story">
+        <div class="modal-card">
+            <button class="modal-close" data-close="modal-story">&times;</button>
+            <div class="modal-header">
+                <i class="fa-solid fa-heart-pulse modal-icon"></i>
+                <h2>Perjalanan Cinta Kami</h2>
+            </div>
+            <div class="modal-body">
+                <div class="slideshow-container">
+                    <!-- Slide 1: Awal Bertemu -->
+                    <div class="story-slide active">
+                        <div class="story-icon-badge"><i class="fa-solid fa-eye"></i></div>
+                        <h3>Pertama Kali Bertemu (2022)</h3>
+                        <p class="story-desc">"Semua berawal dari ketidaksengajaan di sebuah kedai kopi kecil di sudut kota. Tatapan mata kami bertemu secara tidak sengaja, dan sejak detik itu, kami berdua tahu bahwa ada sesuatu yang istimewa yang sedang dimulai."</p>
+                    </div>
+                    
+                    <!-- Slide 2: Komitmen -->
+                    <div class="story-slide">
+                        <div class="story-icon-badge"><i class="fa-solid fa-handshake-angle"></i></div>
+                        <h3>Menjalin Kisah (2024)</h3>
+                        <p class="story-desc">"Setelah dua tahun saling mengenal, bertukar cerita, dan mendukung satu sama lain melalui tawa dan air mata, kami memutuskan untuk berkomitmen penuh. Kami berjanji untuk saling setia menjaga satu sama lain."</p>
+                    </div>
+
+                    <!-- Slide 3: Pernikahan -->
+                    <div class="story-slide">
+                        <div class="story-icon-badge"><i class="fa-solid fa-ring"></i></div>
+                        <h3>Melangkah Bersama (2026)</h3>
+                        <p class="story-desc">"Dan di sinilah kami sekarang, siap melangkah ke gerbang pernikahan untuk menyatukan dua takdir di bawah ridho-Nya. Kami ingin menua bersama, memegang tangan ini selamanya."</p>
+                    </div>
+
+                    <!-- Navigation arrows -->
+                    <div class="slideshow-nav">
+                        <button id="prev-slide" class="nav-btn"><i class="fa-solid fa-chevron-left"></i> Sebelumnya</button>
+                        <span class="slide-indicator"><span id="current-slide-num">1</span> / 3</span>
+                        <button id="next-slide" class="nav-btn">Selanjutnya <i class="fa-solid fa-chevron-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 5: GIFT (Norek + copy) -->
+    <div class="modal-overlay" id="modal-gift">
+        <div class="modal-card">
+            <button class="modal-close" data-close="modal-gift">&times;</button>
+            <div class="modal-header">
+                <i class="fa-solid fa-gift modal-icon"></i>
+                <h2>Hadiah Kasih (Wedding Gift)</h2>
+            </div>
+            <div class="modal-body">
+                <p class="gift-intro">Doa restu Anda adalah hadiah terindah bagi kami. Namun, apabila Anda ingin memberikan tanda kasih secara online, Anda dapat menyalurkannya melalui rekening berikut:</p>
+                
+                <div class="gift-cards">
+                    <div class="gift-card-item">
+                        <div class="bank-logo">BANK CENTRAL ASIA (BCA)</div>
+                        <div class="bank-details">
+                            <p class="account-label">Nomor Rekening:</p>
+                            <p class="account-number" id="norek-bca">1234567890</p>
+                            <p class="account-owner">a.n Romeo Montague</p>
+                        </div>
+                        <button class="copy-norek-btn" data-target="norek-bca"><i class="fa-regular fa-copy"></i> Salin Rekening</button>
+                    </div>
+
+                    <div class="gift-card-item">
+                        <div class="bank-logo">BANK MANDIRI</div>
+                        <div class="bank-details">
+                            <p class="account-label">Nomor Rekening:</p>
+                            <p class="account-number" id="norek-mandiri">9876543210000</p>
+                            <p class="account-owner">a.n Juliet Capulet</p>
+                        </div>
+                        <button class="copy-norek-btn" data-target="norek-mandiri"><i class="fa-regular fa-copy"></i> Salin Rekening</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION (Copy feedback) -->
+    <div id="toast" class="toast">Berhasil disalin! ❤️</div>
+
+    <!-- BACKGROUND AUDIO ELEMENT (Royalty-free romantic piano track) -->
+    <audio id="bg-music" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- JavaScript Bundle -->
+    <script src="app.js"></script>
+</body>
+</html>
