@@ -21,6 +21,7 @@ Dokumen status utama untuk melacak progres pembangunan Undangan Pernikahan Inter
 ## 🐛 Bug Log
 | ID | Date | Severity | Description | Status | Fix Ref |
 |---|---|---|---|---|---|
+| BUG-1 | 2026-05-17 | 🟡 | Custom icon size not applying due to CSS specificity being overridden by generic placeholder styles. | ✅ Fixed | style.css (increased specificities) |
 
 ## 🏗️ Project Build Log
 ### Milestone 1: Inisialisasi & Fondasi Dokumentasi — 2026-05-17
@@ -32,6 +33,6 @@ Dokumen status utama untuk melacak progres pembangunan Undangan Pernikahan Inter
 - [✅] Step 6: Polish, Animations, & Responsive Testing — 2026-05-17 — Animasi floating particles, preloader interaktif, salin norek, dan responsivitas seluler selesai.
 
 ## 🎯 Next Steps
-1. Jalankan browser subagent untuk memverifikasi visual preloader, interaksi objek, dan pengisian guestbook secara langsung.
+1. ✅ Jalankan browser subagent / cek local server untuk memverifikasi visual preloader, interaksi objek, dan pengisian guestbook (Selesai: disesuaikan dengan foto referensi).
 2. Tambahkan aset personalisasi riil (foto mempelai, detail rekening nyata, lagu khusus).
 3. Lakukan Git Commit pertama untuk mendokumentasikan hasil kerja kita.
