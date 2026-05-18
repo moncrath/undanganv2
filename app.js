@@ -29,8 +29,6 @@ document.addEventListener("DOMContentLoaded", () => {
     // ==========================================
     // Simulate loading for 1.5 seconds, then reveal enter button
     setTimeout(() => {
-        const loaderText = preloader.querySelector("p");
-        loaderText.textContent = "Ruangan kenangan siap dibuka!";
         startBtn.style.display = "inline-block";
         startBtn.style.animation = "heartbeat 1.5s infinite ease-in-out";
     }, 1500);
