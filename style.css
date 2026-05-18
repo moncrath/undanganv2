@@ -445,6 +445,18 @@ body {
     filter: drop-shadow(0 10px 14px rgba(0,0,0,0.4));
 }
 
+/* 6. GALERI FOTO (Interactive Object) */
+.obj-gallery {
+    bottom: calc(30vh + 30px);
+    right: 2%;
+    animation: float-gallery 4.6s ease-in-out infinite 0.6s;
+}
+.interactive-object.obj-gallery img {
+    width: 80px;
+    height: 80px;
+    filter: drop-shadow(0 10px 14px rgba(0,0,0,0.4));
+}
+
 /* Object Glow on Hover */
 .object-glow {
     position: absolute;
@@ -510,6 +522,10 @@ body {
 @keyframes float-gift {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-7px); }
+}
+@keyframes float-gallery {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
 }
 
 /* ==========================================
@@ -1129,4 +1145,26 @@ body {
 .toast.show {
     opacity: 1;
     transform: translateX(-50%) translateY(0);
+}
+
+/* ==========================================
+   MODAL 6 CONTENT: GALLERY
+   ========================================== */
+
+.gallery-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-height: 350px;
+    overflow-y: auto;
+    padding-right: 6px;
+    margin-top: 10px;
+}
+
+.gallery-img {
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    object-fit: cover;
+    border: 2px solid rgba(229, 152, 155, 0.2);
 }

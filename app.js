@@ -9,7 +9,8 @@ document.addEventListener("DOMContentLoaded", () => {
             map: false,
             guestbook: false,
             story: false,
-            gift: false
+            gift: false,
+            gallery: false
         },
         currentStorySlide: 0,
         musicPlaying: false
