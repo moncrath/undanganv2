@@ -32,7 +32,10 @@ Dokumen status utama untuk melacak progres pembangunan Undangan Pernikahan Inter
 - [✅] Step 5: Guestbook Integration with LocalStorage — 2026-05-17 — Fitur buku tamu lokal dapat menyimpan pesan tamu dinamis.
 - [✅] Step 6: Polish, Animations, & Responsive Testing — 2026-05-17 — Animasi floating particles, preloader interaktif, salin norek, dan responsivitas seluler selesai.
 
+### Milestone 2: Aset Personalisasi & Penyesuaian Detail — 2026-05-26
+- [✅] Step 1: Revisi Nama Mempelai — 2026-05-26 — Mengubah nama Muhammad Muzayyin menjadi Muhammad Muzayyin S.Kom. dan Nur Laeli menjadi Lili Nur Laeli, Amd.Kes (Rad) pada profil mempelai.
+
 ## 🎯 Next Steps
 1. ✅ Jalankan browser subagent / cek local server untuk memverifikasi visual preloader, interaksi objek, dan pengisian guestbook (Selesai: disesuaikan dengan foto referensi).
 2. Tambahkan aset personalisasi riil (foto mempelai, detail rekening nyata, lagu khusus).
-3. Lakukan Git Commit pertama untuk mendokumentasikan hasil kerja kita.
+3. Lakukan Git Commit untuk mendokumentasikan hasil kerja kita.
