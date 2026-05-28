@@ -201,7 +201,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const submitBtn = guestbookForm.querySelector(".submit-btn");
 
     // 🔴 Sayang, masukkan URL Web App Google Apps Script kamu di sini ya! 🔴
-    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxBwT-Cns5yGwbrnIhHeOmsfhWmsmFiXJlhRv0oV1RB8ydOJxFYRLmt-C3rh3x-CVZ4/exec";
+    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzkFu8_U4UIcP4qjHzosdmEfga8Ng0ssg19InUUp7psJmIaMJghGTpxulquVmCgRWie/exec";
 
     // Load existing wishes from LocalStorage as initial/fallback
     let savedWishes = JSON.parse(localStorage.getItem("undangan_wishes")) || [];
