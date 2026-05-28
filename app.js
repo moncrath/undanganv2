@@ -25,9 +25,47 @@ document.addEventListener("DOMContentLoaded", () => {
     const foundCountLabel = document.getElementById("found-count");
     const progressFill = document.getElementById("progress-fill");
     
+    // Countdown References
+    const cdDays = document.getElementById("cd-days");
+    const cdHours = document.getElementById("cd-hours");
+    const cdMinutes = document.getElementById("cd-minutes");
+    const cdSeconds = document.getElementById("cd-seconds");
+    
     // ==========================================
     // PRELOADER & START GAME
     // ==========================================
+    
+    // ==========================================
+    // COUNTDOWN TIMER
+    // ==========================================
+    const weddingDate = new Date("2026-06-07T09:00:00").getTime();
+    
+    function updateCountdown() {
+        const now = new Date().getTime();
+        const distance = weddingDate - now;
+
+        if (distance < 0) {
+            if (cdDays) cdDays.innerText = "00";
+            if (cdHours) cdHours.innerText = "00";
+            if (cdMinutes) cdMinutes.innerText = "00";
+            if (cdSeconds) cdSeconds.innerText = "00";
+            return;
+        }
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        if (cdDays) cdDays.innerText = days.toString().padStart(2, "0");
+        if (cdHours) cdHours.innerText = hours.toString().padStart(2, "0");
+        if (cdMinutes) cdMinutes.innerText = minutes.toString().padStart(2, "0");
+        if (cdSeconds) cdSeconds.innerText = seconds.toString().padStart(2, "0");
+    }
+    
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
     // Simulate loading for 1.5 seconds, then reveal enter button
     setTimeout(() => {
         startBtn.style.display = "inline-block";
