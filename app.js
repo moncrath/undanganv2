@@ -192,18 +192,43 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ==========================================
-    // DIGITAL GUESTBOOK WITH LOCALSTORAGE
+    // DIGITAL GUESTBOOK DENGAN GOOGLE SHEETS
     // ==========================================
     const guestbookForm = document.getElementById("guestbook-form");
     const wishesList = document.getElementById("wishes-list");
     const wishCountSpan = document.getElementById("wish-count");
     const noWishesPlaceholder = document.getElementById("no-wishes");
+    const submitBtn = guestbookForm.querySelector(".submit-btn");
 
-    // Load existing wishes from LocalStorage on load
+    // 🔴 Sayang, masukkan URL Web App Google Apps Script kamu di sini ya! 🔴
+    const GOOGLE_SCRIPT_URL = "URL_APPS_SCRIPT_KAMU_DISINI";
+
+    // Load existing wishes from LocalStorage as initial/fallback
     let savedWishes = JSON.parse(localStorage.getItem("undangan_wishes")) || [];
     renderWishes();
 
-    guestbookForm.addEventListener("submit", (e) => {
+    // Mengambil data ucapan terbaru dari Google Sheets
+    async function fetchWishes() {
+        if (GOOGLE_SCRIPT_URL === "URL_APPS_SCRIPT_KAMU_DISINI") return;
+        
+        try {
+            const response = await fetch(GOOGLE_SCRIPT_URL);
+            const data = await response.json();
+            
+            if (data && Array.isArray(data)) {
+                savedWishes = data;
+                localStorage.setItem("undangan_wishes", JSON.stringify(savedWishes));
+                renderWishes();
+            }
+        } catch (error) {
+            console.error("Gagal sinkronisasi dengan Google Sheets:", error);
+        }
+    }
+
+    // Ambil data dari internet saat website pertama kali dibuka
+    fetchWishes();
+
+    guestbookForm.addEventListener("submit", async (e) => {
         e.preventDefault();
         
         const nameInput = document.getElementById("guest-name");
@@ -214,22 +239,53 @@ document.addEventListener("DOMContentLoaded", () => {
             wish: wishInput.value.trim(),
             time: new Date().toLocaleDateString("id-ID", { 
                 day: "numeric", 
-                month: "short", 
+                month: "long", 
                 year: "numeric" 
             })
         };
 
-        // Prepend new wish
-        savedWishes.unshift(newWish);
-        localStorage.setItem("undangan_wishes", JSON.stringify(savedWishes));
+        // Ubah tampilan tombol jadi loading
+        const originalBtnText = submitBtn.innerHTML;
+        submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Mengirim...`;
+        submitBtn.disabled = true;
 
-        // Clear form fields
+        // Langsung tampilkan ucapan di UI biar terasa cepat (Optimistic Update)
+        savedWishes.unshift(newWish);
+        renderWishes();
+
+        if (GOOGLE_SCRIPT_URL !== "URL_APPS_SCRIPT_KAMU_DISINI") {
+            try {
+                // Kirim data ke Google Sheets via POST
+                const formData = new URLSearchParams();
+                formData.append('name', newWish.name);
+                formData.append('wish', newWish.wish);
+                formData.append('time', newWish.time);
+
+                await fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    body: formData,
+                    mode: 'no-cors' // Wajib untuk menghindari masalah CORS di browser
+                });
+                
+                // Simpan ke lokal dan beritahu sukses
+                localStorage.setItem("undangan_wishes", JSON.stringify(savedWishes));
+                showToast("Ucapanmu berhasil terkirim! Terima kasih ❤️");
+                
+            } catch (error) {
+                console.error("Gagal mengirim ke Google Sheets:", error);
+                showToast("Gagal kirim ke server, tapi tersimpan lokal kok! 🥺");
+            }
+        } else {
+            // Mode Lokal (jika URL belum diisi)
+            localStorage.setItem("undangan_wishes", JSON.stringify(savedWishes));
+            showToast("Ucapan tersimpan (Mode Lokal) ❤️");
+        }
+
+        // Reset form input
         nameInput.value = "";
         wishInput.value = "";
-
-        // Re-render and show success toast
-        renderWishes();
-        showToast("Ucapanmu berhasil terkirim! Terima kasih ❤️");
+        submitBtn.innerHTML = originalBtnText;
+        submitBtn.disabled = false;
     });
 
     function renderWishes() {
