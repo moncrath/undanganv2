@@ -423,7 +423,7 @@ body {
 
 /* 1. FIGURE MEMPELAI (Center Stage) */
 .obj-figures {
-    bottom: calc(30vh + 30px);
+    bottom: 30vh;
     left: calc(75% - 40px);
     transform: translateX(-50%);
     animation: float-figures 4s ease-in-out infinite;
@@ -436,7 +436,7 @@ body {
 
 /* 2. PETA (Left Back Table - Blue Cloth) */
 .obj-map {
-    bottom: calc(26vh + 90px);
+    bottom: calc(26vh + 60px);
     left: calc(15% - 65px);
     animation: float-map 4.5s ease-in-out infinite 0.5s;
 }
@@ -448,7 +448,7 @@ body {
 
 /* 3. BUKU TAMU / LEAVE A MESSAGE (Center Grass) */
 .obj-guestbook {
-    bottom: calc(18vh + 35px);
+    bottom: calc(18vh + 5px);
     left: 50%;
     transform: translateX(-50%);
     animation: float-gb 4.2s ease-in-out infinite 0.2s;
@@ -485,7 +485,7 @@ body {
 
 /* 6. GALERI FOTO (Interactive Object) */
 .obj-gallery {
-    bottom: calc(30vh + 30px);
+    bottom: 30vh;
     right: 2%;
     animation: float-gallery 4.6s ease-in-out infinite 0.6s;
 }
