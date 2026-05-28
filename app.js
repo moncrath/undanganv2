@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    
+
     // ==========================================
     // INITIAL STATE & CONFIG
     // ==========================================
@@ -24,22 +24,22 @@ document.addEventListener("DOMContentLoaded", () => {
     const musicDisc = document.getElementById("music-disc");
     const foundCountLabel = document.getElementById("found-count");
     const progressFill = document.getElementById("progress-fill");
-    
+
     // Countdown References
     const cdDays = document.getElementById("cd-days");
     const cdHours = document.getElementById("cd-hours");
     const cdMinutes = document.getElementById("cd-minutes");
     const cdSeconds = document.getElementById("cd-seconds");
-    
+
     // ==========================================
     // PRELOADER & START GAME
     // ==========================================
-    
+
     // ==========================================
     // COUNTDOWN TIMER
     // ==========================================
     const weddingDate = new Date("2026-06-07T09:00:00").getTime();
-    
+
     function updateCountdown() {
         const now = new Date().getTime();
         const distance = weddingDate - now;
@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (cdMinutes) cdMinutes.innerText = minutes.toString().padStart(2, "0");
         if (cdSeconds) cdSeconds.innerText = seconds.toString().padStart(2, "0");
     }
-    
+
     setInterval(updateCountdown, 1000);
     updateCountdown();
 
@@ -81,7 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Auto-play music (if permitted by browser)
         playMusic();
-        
+
         // Spawn romantic background particles
         startParticleGenerator();
     });
@@ -127,11 +127,11 @@ document.addEventListener("DOMContentLoaded", () => {
         obj.addEventListener("click", () => {
             const targetModalId = obj.getAttribute("data-target");
             const modal = document.getElementById(targetModalId);
-            
+
             if (modal) {
                 // Open targeted modal
                 modal.classList.add("active");
-                
+
                 // Mark object as found
                 const objKey = obj.id.replace("obj-", "");
                 if (state.foundItems.hasOwnProperty(objKey) && !state.foundItems[objKey]) {
@@ -170,7 +170,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function updateProgress() {
         const total = Object.keys(state.foundItems).length;
         const found = Object.values(state.foundItems).filter(val => val === true).length;
-        
+
         if (foundCountLabel) {
             foundCountLabel.textContent = found;
         }
@@ -201,7 +201,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const submitBtn = guestbookForm.querySelector(".submit-btn");
 
     // 🔴 Sayang, masukkan URL Web App Google Apps Script kamu di sini ya! 🔴
-    const GOOGLE_SCRIPT_URL = "URL_APPS_SCRIPT_KAMU_DISINI";
+    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxBwT-Cns5yGwbrnIhHeOmsfhWmsmFiXJlhRv0oV1RB8ydOJxFYRLmt-C3rh3x-CVZ4/exec";
 
     // Load existing wishes from LocalStorage as initial/fallback
     let savedWishes = JSON.parse(localStorage.getItem("undangan_wishes")) || [];
@@ -210,11 +210,11 @@ document.addEventListener("DOMContentLoaded", () => {
     // Mengambil data ucapan terbaru dari Google Sheets
     async function fetchWishes() {
         if (GOOGLE_SCRIPT_URL === "URL_APPS_SCRIPT_KAMU_DISINI") return;
-        
+
         try {
             const response = await fetch(GOOGLE_SCRIPT_URL);
             const data = await response.json();
-            
+
             if (data && Array.isArray(data)) {
                 savedWishes = data;
                 localStorage.setItem("undangan_wishes", JSON.stringify(savedWishes));
@@ -230,17 +230,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
     guestbookForm.addEventListener("submit", async (e) => {
         e.preventDefault();
-        
+
         const nameInput = document.getElementById("guest-name");
         const wishInput = document.getElementById("guest-wish");
 
         const newWish = {
             name: nameInput.value.trim(),
             wish: wishInput.value.trim(),
-            time: new Date().toLocaleDateString("id-ID", { 
-                day: "numeric", 
-                month: "long", 
-                year: "numeric" 
+            time: new Date().toLocaleDateString("id-ID", {
+                day: "numeric",
+                month: "long",
+                year: "numeric"
             })
         };
 
@@ -266,11 +266,11 @@ document.addEventListener("DOMContentLoaded", () => {
                     body: formData,
                     mode: 'no-cors' // Wajib untuk menghindari masalah CORS di browser
                 });
-                
+
                 // Simpan ke lokal dan beritahu sukses
                 localStorage.setItem("undangan_wishes", JSON.stringify(savedWishes));
                 showToast("Ucapanmu berhasil terkirim! Terima kasih ❤️");
-                
+
             } catch (error) {
                 console.error("Gagal mengirim ke Google Sheets:", error);
                 showToast("Gagal kirim ke server, tapi tersimpan lokal kok! 🥺");
@@ -404,7 +404,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function showToast(message) {
         toast.textContent = message;
         toast.classList.add("show");
-        
+
         setTimeout(() => {
             toast.classList.remove("show");
         }, 2200);
@@ -415,11 +415,11 @@ document.addEventListener("DOMContentLoaded", () => {
     // ==========================================
     function startParticleGenerator() {
         const particlesContainer = document.getElementById("particles-container");
-        
+
         setInterval(() => {
             const isHeart = Math.random() > 0.6; // 40% hearts, 60% standard circles
             const particle = document.createElement("div");
-            
+
             const randomX = Math.random() * 100; // random percentage width
             const randomSize = Math.random() * 8 + 4; // size between 4px and 12px
             const randomDuration = Math.random() * 6 + 6; // speed between 6s and 12s
@@ -436,14 +436,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
             particle.style.left = `${randomX}%`;
             particle.style.animationDuration = `${randomDuration}s`;
-            
+
             particlesContainer.appendChild(particle);
 
             // Clean up old particle elements to prevent memory leaks
             setTimeout(() => {
                 particle.remove();
             }, randomDuration * 1000);
-            
+
         }, 500); // spawn every 500ms
     }
 
