@@ -36,6 +36,7 @@ Dokumen status utama untuk melacak progres pembangunan Undangan Pernikahan Inter
 - [✅] Step 1: Revisi Nama Mempelai — 2026-05-26 — Mengubah nama Muhammad Muzayyin menjadi Muhammad Muzayyin S.Kom. dan Nur Laeli menjadi Lili Nur Laeli, Amd.Kes (Rad) pada profil mempelai.
 - [✅] Step 2: Penyesuaian Galeri Foto — 2026-05-26 — Mengurangi jumlah foto di galeri pasangan dari 5 menjadi 3 dengan menghapus elemen Foto 4 dan Foto 5.
 - [✅] Step 3: Revisi Perjalanan Cinta — 2026-05-26 — Memperbaiki struktur kalimat pada slide cerita pertemuan awal agar lebih rapi dan puitis.
+- [✅] Step 4: Update Detail Acara & Map — 2026-06-04 — Mengubah acara Resepsi menjadi Balik Kloso (termasuk ganti tanggal ke 10 Juni) dengan alamat Pekalongan dan menyesuaikan link Google Maps.
 
 ## 🎯 Next Steps
 1. ✅ Jalankan browser subagent / cek local server untuk memverifikasi visual preloader, interaksi objek, dan pengisian guestbook (Selesai: disesuaikan dengan foto referensi).
